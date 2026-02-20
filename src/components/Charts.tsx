@@ -36,16 +36,16 @@ const speedEvolutionData = [
 ];
 
 const globalAvgData = [
-  { country: "Monaco", speed: 319.59, color: "#8b5cf6" },
-  { country: "Singapore", speed: 300.83, color: "#4f9cf7" },
-  { country: "Hong Kong", speed: 292.21, color: "#00d4ff" },
-  { country: "Romania", speed: 275.98, color: "#10b981" },
-  { country: "Denmark", speed: 270.73, color: "#f59e0b" },
-  { country: "S. Korea", speed: 267.45, color: "#ec4899" },
-  { country: "France", speed: 262.76, color: "#8b5cf6" },
-  { country: "USA", speed: 242.35, color: "#4f9cf7" },
-  { country: "Japan", speed: 225.61, color: "#00d4ff" },
-  { country: "Germany", speed: 210.23, color: "#10b981" },
+  { country: "Monaco", speed: 319.59, color: "#e0e0e0" },
+  { country: "Singapore", speed: 300.83, color: "#c0c0c0" },
+  { country: "Hong Kong", speed: 292.21, color: "#a8a8a8" },
+  { country: "Romania", speed: 275.98, color: "#909090" },
+  { country: "Denmark", speed: 270.73, color: "#808080" },
+  { country: "S. Korea", speed: 267.45, color: "#707070" },
+  { country: "France", speed: 262.76, color: "#606060" },
+  { country: "USA", speed: 242.35, color: "#555555" },
+  { country: "Japan", speed: 225.61, color: "#484848" },
+  { country: "Germany", speed: 210.23, color: "#3a3a3a" },
 ];
 
 const technologyComparisonData = [
@@ -94,14 +94,21 @@ const tabs: { key: ChartTab; label: string }[] = [
   { key: "growth", label: "Global Growth" },
 ];
 
+const tooltipStyle = {
+  backgroundColor: "#1a1a1a",
+  border: "1px solid #2a2a2a",
+  borderRadius: "0px",
+  color: "#e0e0e0",
+};
+
 export default function Charts() {
   const [activeTab, setActiveTab] = useState<ChartTab>("evolution");
 
   return (
-    <section id="charts" className="py-24 px-6 bg-deep-purple/50 relative">
+    <section id="charts" className="py-24 px-6 bg-deep-purple relative">
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <span className="text-sm font-mono text-accent-cyan tracking-widest uppercase">
+          <span className="text-sm font-mono text-text-muted tracking-widest uppercase">
             Data & Visualization
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
@@ -120,10 +127,10 @@ export default function Charts() {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-5 py-2.5 text-sm font-medium transition-all duration-200 ${
                 activeTab === tab.key
-                  ? "bg-accent-violet text-white glow-violet"
-                  : "bg-card-bg border border-card-border text-text-secondary hover:text-text-primary hover:border-accent-violet/50"
+                  ? "bg-card-border text-text-primary"
+                  : "bg-card-bg border border-card-border text-text-secondary hover:text-text-primary"
               }`}
             >
               {tab.label}
@@ -132,7 +139,7 @@ export default function Charts() {
         </div>
 
         {/* Chart container */}
-        <div className="bg-card-bg/60 backdrop-blur-md border border-card-border rounded-2xl p-6 md:p-8">
+        <div className="bg-card-bg border border-card-border p-6 md:p-8">
           {activeTab === "evolution" && (
             <div>
               <h3 className="text-lg font-semibold mb-2">
@@ -154,25 +161,25 @@ export default function Charts() {
                     >
                       <stop
                         offset="5%"
-                        stopColor="#8b5cf6"
-                        stopOpacity={0.4}
+                        stopColor="#808080"
+                        stopOpacity={0.3}
                       />
                       <stop
                         offset="95%"
-                        stopColor="#8b5cf6"
+                        stopColor="#808080"
                         stopOpacity={0}
                       />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#2d2060" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
                   <XAxis
                     dataKey="year"
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#a89ec4", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#808080", fontSize: 12 }}
                   />
                   <YAxis
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#a89ec4", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#808080", fontSize: 12 }}
                     scale="log"
                     domain={[0.001, 100000]}
                     tickFormatter={(v) =>
@@ -180,12 +187,7 @@ export default function Charts() {
                     }
                   />
                   <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#1e1640",
-                      border: "1px solid #2d2060",
-                      borderRadius: "12px",
-                      color: "#f0edf6",
-                    }}
+                    contentStyle={tooltipStyle}
                     formatter={(value: number | undefined) => {
                       const v = value ?? 0;
                       if (v >= 1000) return [`${v / 1000} Gbps`, "Speed"];
@@ -196,12 +198,12 @@ export default function Charts() {
                   <Area
                     type="monotone"
                     dataKey="speed"
-                    stroke="#8b5cf6"
-                    strokeWidth={3}
+                    stroke="#aaaaaa"
+                    strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#speedGradient)"
-                    dot={{ fill: "#8b5cf6", stroke: "#1e1640", strokeWidth: 2, r: 5 }}
-                    activeDot={{ r: 7, stroke: "#8b5cf6", strokeWidth: 2 }}
+                    dot={{ fill: "#aaaaaa", stroke: "#1a1a1a", strokeWidth: 2, r: 4 }}
+                    activeDot={{ r: 6, stroke: "#aaaaaa", strokeWidth: 2 }}
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -224,34 +226,29 @@ export default function Charts() {
                 >
                   <CartesianGrid
                     strokeDasharray="3 3"
-                    stroke="#2d2060"
+                    stroke="#2a2a2a"
                     horizontal={false}
                   />
                   <XAxis
                     type="number"
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#a89ec4", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#808080", fontSize: 12 }}
                     tickFormatter={(v) => `${v} Mbps`}
                   />
                   <YAxis
                     dataKey="country"
                     type="category"
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#a89ec4", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#808080", fontSize: 12 }}
                     width={80}
                   />
                   <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#1e1640",
-                      border: "1px solid #2d2060",
-                      borderRadius: "12px",
-                      color: "#f0edf6",
-                    }}
+                    contentStyle={tooltipStyle}
                     formatter={(value: number | undefined) => [`${value ?? 0} Mbps`, "Avg Speed"]}
                   />
-                  <Bar dataKey="speed" radius={[0, 8, 8, 0]} barSize={24}>
+                  <Bar dataKey="speed" radius={[0, 0, 0, 0]} barSize={24}>
                     {globalAvgData.map((entry, index) => (
-                      <Cell key={index} fill={entry.color} fillOpacity={0.8} />
+                      <Cell key={index} fill={entry.color} fillOpacity={0.9} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -270,45 +267,45 @@ export default function Charts() {
               </p>
               <ResponsiveContainer width="100%" height={420}>
                 <RadarChart data={technologyComparisonData}>
-                  <PolarGrid stroke="#2d2060" />
+                  <PolarGrid stroke="#2a2a2a" />
                   <PolarAngleAxis
                     dataKey="tech"
-                    tick={{ fill: "#a89ec4", fontSize: 12 }}
+                    tick={{ fill: "#808080", fontSize: 12 }}
                   />
                   <Radar
                     name="5G"
                     dataKey="5G"
-                    stroke="#ec4899"
-                    fill="#ec4899"
-                    fillOpacity={0.15}
+                    stroke="#e0e0e0"
+                    fill="#e0e0e0"
+                    fillOpacity={0.08}
                     strokeWidth={2}
                   />
                   <Radar
                     name="Wi-Fi 7"
                     dataKey="Wi-Fi 7"
-                    stroke="#8b5cf6"
-                    fill="#8b5cf6"
-                    fillOpacity={0.15}
+                    stroke="#aaaaaa"
+                    fill="#aaaaaa"
+                    fillOpacity={0.08}
                     strokeWidth={2}
                   />
                   <Radar
                     name="Fiber"
                     dataKey="Fiber"
-                    stroke="#4f9cf7"
-                    fill="#4f9cf7"
-                    fillOpacity={0.15}
+                    stroke="#777777"
+                    fill="#777777"
+                    fillOpacity={0.08}
                     strokeWidth={2}
                   />
                   <Radar
                     name="Starlink"
                     dataKey="Starlink"
-                    stroke="#10b981"
-                    fill="#10b981"
-                    fillOpacity={0.15}
+                    stroke="#505050"
+                    fill="#505050"
+                    fillOpacity={0.08}
                     strokeWidth={2}
                   />
                   <Legend
-                    wrapperStyle={{ color: "#a89ec4", fontSize: "13px" }}
+                    wrapperStyle={{ color: "#808080", fontSize: "13px" }}
                   />
                 </RadarChart>
               </ResponsiveContainer>
@@ -331,19 +328,19 @@ export default function Charts() {
                       <th className="text-left py-3 px-4 text-text-secondary font-medium">
                         File
                       </th>
-                      <th className="text-center py-3 px-4 text-accent-orange font-medium">
+                      <th className="text-center py-3 px-4 text-text-muted font-medium">
                         Dial-Up
                       </th>
-                      <th className="text-center py-3 px-4 text-accent-pink font-medium">
+                      <th className="text-center py-3 px-4 text-text-muted font-medium">
                         DSL
                       </th>
-                      <th className="text-center py-3 px-4 text-accent-blue font-medium">
+                      <th className="text-center py-3 px-4 text-text-muted font-medium">
                         Cable
                       </th>
-                      <th className="text-center py-3 px-4 text-accent-violet font-medium">
+                      <th className="text-center py-3 px-4 text-text-secondary font-medium">
                         Fiber
                       </th>
-                      <th className="text-center py-3 px-4 text-accent-cyan font-medium">
+                      <th className="text-center py-3 px-4 text-text-primary font-medium">
                         5G
                       </th>
                     </tr>
@@ -355,19 +352,19 @@ export default function Charts() {
                         className="border-b border-card-border/50 hover:bg-card-border/10 transition-colors"
                       >
                         <td className="py-4 px-4 font-medium">{row.file}</td>
-                        <td className="py-4 px-4 text-center font-mono text-accent-orange">
+                        <td className="py-4 px-4 text-center font-mono text-text-muted">
                           {formatDownloadTime(row.dialup)}
                         </td>
-                        <td className="py-4 px-4 text-center font-mono text-accent-pink">
+                        <td className="py-4 px-4 text-center font-mono text-text-muted">
                           {formatDownloadTime(row.dsl)}
                         </td>
-                        <td className="py-4 px-4 text-center font-mono text-accent-blue">
+                        <td className="py-4 px-4 text-center font-mono text-text-secondary">
                           {formatDownloadTime(row.cable)}
                         </td>
-                        <td className="py-4 px-4 text-center font-mono text-accent-violet">
+                        <td className="py-4 px-4 text-center font-mono text-text-secondary">
                           {formatDownloadTime(row.fiber)}
                         </td>
-                        <td className="py-4 px-4 text-center font-mono text-accent-cyan">
+                        <td className="py-4 px-4 text-center font-mono text-text-primary">
                           {formatDownloadTime(row.fiveG)}
                         </td>
                       </tr>
@@ -393,55 +390,48 @@ export default function Charts() {
               </p>
               <ResponsiveContainer width="100%" height={420}>
                 <LineChart data={globalGrowthData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#2d2060" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
                   <XAxis
                     dataKey="year"
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#a89ec4", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#808080", fontSize: 12 }}
                   />
                   <YAxis
                     yAxisId="users"
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#4f9cf7", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#aaaaaa", fontSize: 12 }}
                     tickFormatter={(v) => `${v}M`}
                   />
                   <YAxis
                     yAxisId="speed"
                     orientation="right"
-                    stroke="#6b5f8a"
-                    tick={{ fill: "#8b5cf6", fontSize: 12 }}
+                    stroke="#505050"
+                    tick={{ fill: "#666666", fontSize: 12 }}
                     tickFormatter={(v) => `${v} Mbps`}
                   />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#1e1640",
-                      border: "1px solid #2d2060",
-                      borderRadius: "12px",
-                      color: "#f0edf6",
-                    }}
-                  />
+                  <Tooltip contentStyle={tooltipStyle} />
                   <Legend
-                    wrapperStyle={{ color: "#a89ec4", fontSize: "13px" }}
+                    wrapperStyle={{ color: "#808080", fontSize: "13px" }}
                   />
                   <Line
                     yAxisId="users"
                     type="monotone"
                     dataKey="users"
-                    stroke="#4f9cf7"
-                    strokeWidth={3}
+                    stroke="#aaaaaa"
+                    strokeWidth={2}
                     name="Users (Millions)"
-                    dot={{ fill: "#4f9cf7", stroke: "#1e1640", strokeWidth: 2 }}
+                    dot={{ fill: "#aaaaaa", stroke: "#1a1a1a", strokeWidth: 2 }}
                   />
                   <Line
                     yAxisId="speed"
                     type="monotone"
                     dataKey="avgSpeed"
-                    stroke="#8b5cf6"
-                    strokeWidth={3}
+                    stroke="#555555"
+                    strokeWidth={2}
                     name="Avg Speed (Mbps)"
                     dot={{
-                      fill: "#8b5cf6",
-                      stroke: "#1e1640",
+                      fill: "#555555",
+                      stroke: "#1a1a1a",
                       strokeWidth: 2,
                     }}
                   />

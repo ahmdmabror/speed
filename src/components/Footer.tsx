@@ -6,11 +6,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-violet to-accent-cyan flex items-center justify-center text-sm font-bold">
-                ⚡
+              <div className="w-8 h-8 bg-card-border flex items-center justify-center text-sm font-bold">
+                S
               </div>
               <span className="font-bold text-lg tracking-tight">
-                Speed<span className="text-accent-violet">.</span>
+                Speed<span className="text-text-muted">.</span>
               </span>
             </div>
             <p className="text-text-secondary text-sm leading-relaxed">
@@ -28,25 +28,25 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               <a
                 href="#timeline"
-                className="text-sm text-text-secondary hover:text-accent-violet transition-colors"
+                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
               >
                 Timeline
               </a>
               <a
                 href="#charts"
-                className="text-sm text-text-secondary hover:text-accent-violet transition-colors"
+                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
               >
                 Charts & Data
               </a>
               <a
                 href="#stats"
-                className="text-sm text-text-secondary hover:text-accent-violet transition-colors"
+                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
               >
                 Statistics
               </a>
               <a
                 href="#future"
-                className="text-sm text-text-secondary hover:text-accent-violet transition-colors"
+                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
               >
                 Future Tech
               </a>
@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-card-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-card-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-muted">
             Built with Next.js, Tailwind CSS & Recharts. Data compiled from
             public sources.
