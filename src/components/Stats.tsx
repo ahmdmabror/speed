@@ -5,63 +5,56 @@ const stats = [
     value: "821,000x",
     label: "Speed Increase",
     description: "From 56 Kbps dial-up (1996) to 46 Gbps Wi-Fi 7 (2024)",
-    icon: "⚡",
-    color: "from-accent-violet to-accent-pink",
+    icon: "//",
   },
   {
     value: "5.44B",
     label: "Internet Users",
     description: "67.5% of the world's population is now online",
-    icon: "🌍",
-    color: "from-accent-blue to-accent-cyan",
+    icon: "::",
   },
   {
     value: "< 5ms",
     label: "5G Latency",
     description: "Down from 150ms on 3G — a 30x improvement",
-    icon: "🏎️",
-    color: "from-accent-cyan to-accent-green",
+    icon: ">>",
   },
   {
     value: "402 Tb/s",
     label: "Fiber Record",
     description: "Set in 2024 by Japan's NICT over standard fiber",
-    icon: "🔬",
-    color: "from-accent-orange to-accent-pink",
+    icon: "||",
   },
   {
     value: "6,000+",
     label: "Starlink Satellites",
     description: "Providing broadband to 100+ countries from orbit",
-    icon: "🛰️",
-    color: "from-accent-green to-accent-blue",
+    icon: "^^",
   },
   {
     value: "500 Zb",
     label: "Annual Data by 2025",
     description: "Global data creation expected to reach 500 zettabytes",
-    icon: "📊",
-    color: "from-accent-pink to-accent-violet",
+    icon: "##",
   },
 ];
 
 const speedBars = [
-  { label: "Dial-Up (1996)", speed: 0.056, max: 46000, color: "bg-accent-orange" },
-  { label: "DSL (2000)", speed: 1.5, max: 46000, color: "bg-accent-pink" },
-  { label: "Cable (2006)", speed: 25, max: 46000, color: "bg-accent-blue" },
-  { label: "4G LTE (2012)", speed: 100, max: 46000, color: "bg-accent-cyan" },
-  { label: "Fiber (2015)", speed: 1000, max: 46000, color: "bg-accent-violet" },
-  { label: "5G (2020)", speed: 10000, max: 46000, color: "bg-accent-green" },
-  { label: "Wi-Fi 7 (2024)", speed: 46000, max: 46000, color: "bg-accent-pink" },
+  { label: "Dial-Up (1996)", speed: 0.056, max: 46000 },
+  { label: "DSL (2000)", speed: 1.5, max: 46000 },
+  { label: "Cable (2006)", speed: 25, max: 46000 },
+  { label: "4G LTE (2012)", speed: 100, max: 46000 },
+  { label: "Fiber (2015)", speed: 1000, max: 46000 },
+  { label: "5G (2020)", speed: 10000, max: 46000 },
+  { label: "Wi-Fi 7 (2024)", speed: 46000, max: 46000 },
 ];
 
 export default function Stats() {
   return (
     <section id="stats" className="py-24 px-6 relative">
-      <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <span className="text-sm font-mono text-accent-green tracking-widest uppercase">
+          <span className="text-sm font-mono text-text-muted tracking-widest uppercase">
             By The Numbers
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
@@ -77,23 +70,19 @@ export default function Stats() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="stat-card card-shine rounded-2xl border border-card-border bg-card-bg/60 backdrop-blur-sm p-6"
+              className="stat-card border border-card-border bg-card-bg p-6"
             >
               <div className="flex items-start justify-between mb-4">
-                <span className="text-3xl">{stat.icon}</span>
-                <div
-                  className={`h-1 w-16 rounded-full bg-gradient-to-r ${stat.color}`}
-                />
+                <span className="text-lg font-mono text-text-muted">{stat.icon}</span>
+                <div className="h-px w-16 bg-card-border mt-3" />
               </div>
-              <div
-                className={`text-3xl md:text-4xl font-black font-mono bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
-              >
+              <div className="text-3xl md:text-4xl font-black font-mono text-text-primary mb-2">
                 {stat.value}
               </div>
-              <div className="text-sm font-semibold text-text-primary mb-1">
+              <div className="text-sm font-semibold text-text-secondary mb-1">
                 {stat.label}
               </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
+              <p className="text-xs text-text-muted leading-relaxed">
                 {stat.description}
               </p>
             </div>
@@ -101,7 +90,7 @@ export default function Stats() {
         </div>
 
         {/* Speed comparison bars */}
-        <div className="bg-card-bg/60 backdrop-blur-md border border-card-border rounded-2xl p-6 md:p-8">
+        <div className="bg-card-bg border border-card-border p-6 md:p-8">
           <h3 className="text-xl font-bold mb-2">Speed Comparison</h3>
           <p className="text-text-secondary text-sm mb-8">
             Visualizing the staggering growth in peak internet speeds (logarithmic scale).
@@ -115,9 +104,9 @@ export default function Stats() {
                   <div className="w-36 text-sm text-text-secondary font-mono shrink-0">
                     {bar.label}
                   </div>
-                  <div className="flex-1 h-6 bg-midnight rounded-full overflow-hidden">
+                  <div className="flex-1 h-6 bg-midnight overflow-hidden">
                     <div
-                      className={`h-full ${bar.color} rounded-full animate-grow`}
+                      className="h-full bg-text-muted animate-grow"
                       style={{ width: `${logPercent}%` }}
                     />
                   </div>

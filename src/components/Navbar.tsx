@@ -23,17 +23,17 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-midnight/80 backdrop-blur-xl border-b border-card-border/50"
+          ? "bg-midnight border-b border-card-border"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-violet to-accent-cyan flex items-center justify-center text-sm font-bold">
-            ⚡
+          <div className="w-8 h-8 bg-card-border flex items-center justify-center text-sm font-bold">
+            S
           </div>
           <span className="font-bold text-lg tracking-tight">
-            Speed<span className="text-accent-violet">.</span>
+            Speed<span className="text-text-muted">.</span>
           </span>
         </a>
 
@@ -43,7 +43,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-card-bg/50"
+              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors"
             >
               {link.label}
             </a>
@@ -76,14 +76,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-midnight/95 backdrop-blur-xl border-b border-card-border">
+        <div className="md:hidden bg-midnight border-b border-card-border">
           <div className="px-6 py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="px-4 py-3 text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-card-bg/50"
+                className="px-4 py-3 text-text-secondary hover:text-text-primary transition-colors"
               >
                 {link.label}
               </a>
