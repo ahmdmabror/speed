@@ -27,9 +27,10 @@ export default function Hero() {
   const current = speedMilestones[currentIndex];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col overflow-hidden">
+      {/* Main content — centered vertically */}
       <div
-        className={`relative z-10 text-center max-w-5xl mx-auto px-6 transition-all duration-1000 ${
+        className={`flex-1 flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-6 pt-20 transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
@@ -74,13 +75,13 @@ export default function Hero() {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted">
-          <span className="text-xs font-mono">Scroll to explore</span>
-          <div className="w-5 h-8 border-2 border-text-muted flex items-start justify-center p-1">
-            <div className="w-1 h-2 bg-text-muted animate-bounce" />
-          </div>
+      {/* Scroll indicator — pinned to bottom of section, outside content flow */}
+      <div className="pb-8 pt-6 flex flex-col items-center gap-2 text-text-muted">
+        <span className="text-xs font-mono">Scroll to explore</span>
+        <div className="w-5 h-8 border-2 border-text-muted flex items-start justify-center p-1">
+          <div className="w-1 h-2 bg-text-muted animate-bounce" />
         </div>
       </div>
     </section>
